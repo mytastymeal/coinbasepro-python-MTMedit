@@ -97,8 +97,8 @@ class WebsocketClient(object):
         self.keepalive.start()
         while not self.stop:
             try:
-                data = self.ws.recv()
-                msg = json.loads(data)
+                self.data = self.ws.recv()
+                msg = json.loads(self.data)
             except ValueError as e:
                 self.on_error(e)
             except Exception as e:
@@ -136,10 +136,10 @@ class WebsocketClient(object):
         if self.mongo_collection:  # dump JSON to given mongo collection
             self.mongo_collection.insert_one(msg)
 
-    def on_error(self, e, data=None):
+    def on_error(self, e, self.data=None):
         self.error = e
         self.stop = True
-        print('{} - data: {}'.format(e, data))
+        print('{} - self.data: {}'.format(e, self.data))
 
 
 if __name__ == "__main__":
