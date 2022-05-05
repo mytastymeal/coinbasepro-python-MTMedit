@@ -19,12 +19,12 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name='cbpro',
-    version='1.1.4',
+    name='cbpro-MTM',
+    version='0.0.1',
     author='Daniel Paquin',
     author_email='dpaq34@gmail.com',
     license='MIT',
-    url='https://github.com/danpaquin/coinbasepro-python',
+    url='https://github.com/mytastymeal/coinbasepro-python-MTMedit',
     packages=find_packages(),
     install_requires=install_requires,
     tests_require=tests_require,
@@ -34,7 +34,7 @@ setup(
     description='The unofficial Python client for the Coinbase Pro API',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    download_url='https://github.com/danpaquin/coinbasepro-python/archive/master.zip',
+    download_url='https://github.com/mytastymeal/coinbasepro-python-MTMedit/archive/master.zip',
     keywords=['gdax', 'gdax-api', 'orderbook', 'trade', 'bitcoin', 'ethereum', 'BTC', 'ETH', 'client', 'api', 'wrapper',
               'exchange', 'crypto', 'currency', 'trading', 'trading-api', 'coinbase', 'pro', 'prime', 'coinbasepro'],
     classifiers=[
