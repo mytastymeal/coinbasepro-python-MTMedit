@@ -8,7 +8,7 @@ dist/
 *.rst
 venv/
 *log.txt
-cbpro/__pycache__/
+cbpromtm/__pycache__/
 .cache/
 .coverage
 tests/__pycache__/

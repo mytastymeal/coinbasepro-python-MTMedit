@@ -2,7 +2,7 @@ import pytest
 import json
 import time
 from itertools import islice
-from cbpro.authenticated_client import AuthenticatedClient
+from cbpromtm.authenticated_client import AuthenticatedClient
 
 
 @pytest.fixture(scope='module')

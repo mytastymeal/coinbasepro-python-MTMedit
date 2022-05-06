@@ -36,4 +36,4 @@ RUN mkdir -p $CODE_DIR
 COPY . $CODE_DIR
 
 RUN cd $CODE_DIR && \
-    pip install cbpro
+    pip install cbpromtm

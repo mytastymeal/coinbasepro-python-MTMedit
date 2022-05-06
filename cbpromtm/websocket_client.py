@@ -1,4 +1,4 @@
-# cbpro/WebsocketClient.py
+# cbpromtm/WebsocketClient.py
 # original author: Daniel Paquin
 # mongo "support" added by Drew Rice
 #
@@ -14,7 +14,7 @@ import time
 from threading import Thread
 from websocket import create_connection, WebSocketConnectionClosedException
 from pymongo import MongoClient
-from cbpro.cbpro_auth import get_auth_headers
+from cbpromtm.cbpro_auth import get_auth_headers
 
 
 class WebsocketClient(object):
@@ -144,11 +144,11 @@ class WebsocketClient(object):
 
 if __name__ == "__main__":
     import sys
-    import cbpro
+    import cbpromtm
     import time
 
 
-    class MyWebsocketClient(cbpro.WebsocketClient):
+    class MyWebsocketClient(cbpromtm.WebsocketClient):
         def on_open(self):
             self.url = "wss://ws-feed.pro.coinbase.com/"
             self.products = ["BTC-USD", "ETH-USD"]

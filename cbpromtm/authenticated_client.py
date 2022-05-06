@@ -1,5 +1,5 @@
 #
-# cbpro/AuthenticatedClient.py
+# cbpromtm/AuthenticatedClient.py
 # Daniel Paquin
 #
 # For authenticated requests to the Coinbase exchange
@@ -11,12 +11,12 @@ import requests
 import base64
 import json
 from requests.auth import AuthBase
-from cbpro.public_client import PublicClient
-from cbpro.cbpro_auth import CBProAuth
+from cbpromtm.public_client import PublicClient
+from cbpromtm.cbpro_auth import CBProAuth
 
 
 class AuthenticatedClient(PublicClient):
-    """ Provides access to Private Endpoints on the cbpro API.
+    """ Provides access to Private Endpoints on the cbpromtm API.
 
     All requests default to the live `api_url`: 'https://api.pro.coinbase.com'.
     To test your application using the sandbox modify the `api_url`.
@@ -34,7 +34,7 @@ class AuthenticatedClient(PublicClient):
             key (str): Your API key.
             b64secret (str): The secret key matching your API key.
             passphrase (str): Passphrase chosen when setting up key.
-            api_url (Optional[str]): API URL. Defaults to cbpro API.
+            api_url (Optional[str]): API URL. Defaults to cbpromtm API.
         """
         super(AuthenticatedClient, self).__init__(api_url)
         self.auth = CBProAuth(key, b64secret, passphrase)
@@ -93,7 +93,7 @@ class AuthenticatedClient(PublicClient):
         decreases your account balance.
 
         Entry type indicates the reason for the account change.
-        * transfer:	Funds moved to/from Coinbase to cbpro
+        * transfer:	Funds moved to/from Coinbase to cbpromtm
         * match:	Funds moved as a result of a trade
         * fee:	    Fee as a result of a trade
         * rebate:   Fee rebate as per our fee schedule
@@ -214,7 +214,7 @@ class AuthenticatedClient(PublicClient):
             **client_oid (str): Order ID selected by you to identify your order.
                 This should be a UUID, which will be broadcast in the public
                 feed for `received` messages.
-            **stp (str): Self-trade prevention flag. cbpro doesn't allow self-
+            **stp (str): Self-trade prevention flag. cbpromtm doesn't allow self-
                 trading. This behavior can be modified with this flag.
                 Options:
                 'dc'	Decrease and Cancel (default)
@@ -286,7 +286,7 @@ class AuthenticatedClient(PublicClient):
         """Place a buy order.
 
         This is included to maintain backwards compatibility with older versions
-        of cbpro-Python. For maximum support from docstrings and function
+        of cbpromtm-Python. For maximum support from docstrings and function
         signatures see the order type-specific functions place_limit_order,
         place_market_order, and place_stop_order.
 
@@ -306,7 +306,7 @@ class AuthenticatedClient(PublicClient):
         """Place a sell order.
 
         This is included to maintain backwards compatibility with older versions
-        of cbpro-Python. For maximum support from docstrings and function
+        of cbpromtm-Python. For maximum support from docstrings and function
         signatures see the order type-specific functions place_limit_order,
         place_market_order, and place_stop_order.
 
@@ -725,7 +725,7 @@ class AuthenticatedClient(PublicClient):
             currency (str): The currency, example USD
 
         Returns:
-            Not specified by cbpro.
+            Not specified by cbpromtm.
 
         """
         params = {
@@ -785,7 +785,7 @@ class AuthenticatedClient(PublicClient):
         """ Close position.
 
         Args:
-            repay_only (bool): Undocumented by cbpro.
+            repay_only (bool): Undocumented by cbpromtm.
 
         Returns:
             Undocumented
@@ -825,9 +825,9 @@ class AuthenticatedClient(PublicClient):
     def coinbase_deposit(self, amount, currency, coinbase_account_id):
         """ Deposit funds from a coinbase account.
 
-        You can move funds between your Coinbase accounts and your cbpro
+        You can move funds between your Coinbase accounts and your cbpromtm
         trading accounts within your daily limits. Moving funds between
-        Coinbase and cbpro is instant and free.
+        Coinbase and cbpromtm is instant and free.
 
         See AuthenticatedClient.get_coinbase_accounts() to receive
         information regarding your coinbase_accounts.
@@ -882,9 +882,9 @@ class AuthenticatedClient(PublicClient):
     def coinbase_withdraw(self, amount, currency, coinbase_account_id):
         """ Withdraw funds to a coinbase account.
 
-        You can move funds between your Coinbase accounts and your cbpro
+        You can move funds between your Coinbase accounts and your cbpromtm
         trading accounts within your daily limits. Moving funds between
-        Coinbase and cbpro is instant and free.
+        Coinbase and cbpromtm is instant and free.
 
         See AuthenticatedClient.get_coinbase_accounts() to receive
         information regarding your coinbase_accounts.

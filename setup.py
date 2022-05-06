@@ -19,7 +19,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name='cbproMTM',
+    name='cbpromtm',
     version='0.0.1',
     author='Daniel Paquin',
     author_email='dpaq34@gmail.com',

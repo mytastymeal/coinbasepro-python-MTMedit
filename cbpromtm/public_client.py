@@ -1,5 +1,5 @@
 #
-# cbpro/PublicClient.py
+# cbpromtm/PublicClient.py
 # Daniel Paquin
 #
 # For public requests to the Coinbase exchange
@@ -8,21 +8,21 @@ import requests
 
 
 class PublicClient(object):
-    """cbpro public client API.
+    """cbpromtm public client API.
 
     All requests default to the `product_id` specified at object
     creation if not otherwise specified.
 
     Attributes:
-        url (Optional[str]): API URL. Defaults to cbpro API.
+        url (Optional[str]): API URL. Defaults to cbpromtm API.
 
     """
 
     def __init__(self, api_url='https://api.pro.coinbase.com', timeout=30):
-        """Create cbpro API public client.
+        """Create cbpromtm API public client.
 
         Args:
-            api_url (Optional[str]): API URL. Defaults to cbpro API.
+            api_url (Optional[str]): API URL. Defaults to cbpromtm API.
 
         """
         self.url = api_url.rstrip('/')
@@ -303,7 +303,7 @@ class PublicClient(object):
             # If there are no more pages, we're done. Otherwise update `after`
             # param to get next page.
             # If this request included `before` don't get any more pages - the
-            # cbpro API doesn't support multiple pages in that case.
+            # cbpromtm API doesn't support multiple pages in that case.
             if not r.headers.get('cb-after') or \
                     params.get('before') is not None:
                 break

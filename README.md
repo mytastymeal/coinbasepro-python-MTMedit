@@ -49,8 +49,9 @@ Only some endpoints in the API are available to everyone.  The public endpoints
 can be reached using ```PublicClient```
 
 ```python
-import cbpro
-public_client = cbpro.PublicClient()
+import cbpromtm
+
+public_client = cbpromtm.PublicClient()
 ```
 
 ### PublicClient Methods
@@ -113,11 +114,12 @@ class, so you will only need to initialize one if you are planning to
 integrate both into your script.
 
 ```python
-import cbpro
-auth_client = cbpro.AuthenticatedClient(key, b64secret, passphrase)
+import cbpromtm
+
+auth_client = cbpromtm.AuthenticatedClient(key, b64secret, passphrase)
 # Use the sandbox API (requires a different set of API access credentials)
-auth_client = cbpro.AuthenticatedClient(key, b64secret, passphrase,
-                                  api_url="https://api-public.sandbox.pro.coinbase.com")
+auth_client = cbpromtm.AuthenticatedClient(key, b64secret, passphrase,
+                                           api_url="https://api-public.sandbox.pro.coinbase.com")
 ```
 
 ### Pagination
@@ -258,24 +260,27 @@ If you would like to receive real-time market updates, you must subscribe to the
 [websocket feed](https://docs.pro.coinbase.com/#websocket-feed).
 
 #### Subscribe to a single product
+
 ```python
-import cbpro
+import cbpromtm
 
 # Parameters are optional
-wsClient = cbpro.WebsocketClient(url="wss://ws-feed.pro.coinbase.com",
-                                products="BTC-USD",
-                                channels=["ticker"])
+wsClient = cbpromtm.WebsocketClient(url="wss://ws-feed.pro.coinbase.com",
+                                    products="BTC-USD",
+                                    channels=["ticker"])
 # Do other stuff...
 wsClient.close()
 ```
 
 #### Subscribe to multiple products
+
 ```python
-import cbpro
+import cbpromtm
+
 # Parameters are optional
-wsClient = cbpro.WebsocketClient(url="wss://ws-feed.pro.coinbase.com",
-                                products=["BTC-USD", "ETH-USD"],
-                                channels=["ticker"])
+wsClient = cbpromtm.WebsocketClient(url="wss://ws-feed.pro.coinbase.com",
+                                    products=["BTC-USD", "ETH-USD"],
+                                    channels=["ticker"])
 # Do other stuff...
 wsClient.close()
 ```
@@ -284,10 +289,12 @@ wsClient.close()
 The ```WebsocketClient``` now supports data gathering via MongoDB. Given a
 MongoDB collection, the ```WebsocketClient``` will stream results directly into
 the database collection.
+
 ```python
 # import PyMongo and connect to a local, running Mongo instance
 from pymongo import MongoClient
-import cbpro
+import cbpromtm
+
 mongo_client = MongoClient('mongodb://localhost:27017/')
 
 # specify the database and collection
@@ -295,8 +302,8 @@ db = mongo_client.cryptocurrency_database
 BTC_collection = db.BTC_collection
 
 # instantiate a WebsocketClient instance, with a Mongo collection as a parameter
-wsClient = cbpro.WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products="BTC-USD",
-    mongo_collection=BTC_collection, should_print=False)
+wsClient = cbpromtm.WebsocketClient(url="wss://ws-feed.pro.coinbase.com", products="BTC-USD",
+                                    mongo_collection=BTC_collection, should_print=False)
 wsClient.start()
 ```
 
@@ -312,27 +319,33 @@ is where you want to add initial parameters.
 argument that contains the message of dict type.
 - on_close - called once after the websocket has been closed.
 - close - call this method to close the websocket connection (do not overwrite).
+
 ```python
-import cbpro, time
-class myWebsocketClient(cbpro.WebsocketClient):
+import cbpromtm, time
+
+
+class myWebsocketClient(cbpromtm.WebsocketClient):
     def on_open(self):
         self.url = "wss://ws-feed.pro.coinbase.com/"
         self.products = ["LTC-USD"]
         self.message_count = 0
         print("Lets count the messages!")
+
     def on_message(self, msg):
         self.message_count += 1
         if 'price' in msg and 'type' in msg:
-            print ("Message type:", msg["type"],
-                   "\t@ {:.3f}".format(float(msg["price"])))
+            print("Message type:", msg["type"],
+                  "\t@ {:.3f}".format(float(msg["price"])))
+
     def on_close(self):
         print("-- Goodbye! --")
+
 
 wsClient = myWebsocketClient()
 wsClient.start()
 print(wsClient.url, wsClient.products)
 while (wsClient.message_count < 500):
-    print ("\nmessage_count =", "{} \n".format(wsClient.message_count))
+    print("\nmessage_count =", "{} \n".format(wsClient.message_count))
     time.sleep(1)
 wsClient.close()
 ```
@@ -351,8 +364,9 @@ the orderbook for the product_id input.  Please provide your feedback for future
 improvements.
 
 ```python
-import cbpro, time
-order_book = cbpro.OrderBook(product_id='BTC-USD')
+import cbpromtm, time
+
+order_book = cbpromtm.OrderBook(product_id='BTC-USD')
 order_book.start()
 time.sleep(10)
 order_book.close()

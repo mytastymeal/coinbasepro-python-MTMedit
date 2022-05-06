@@ -3,7 +3,7 @@ import time
 from itertools import islice
 import datetime
 from dateutil.relativedelta import relativedelta
-from cbpro.public_client import PublicClient
+from cbpromtm.public_client import PublicClient
 
 
 @pytest.fixture(scope='module')
